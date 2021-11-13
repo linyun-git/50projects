@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .img {
+            height: 100vh;
+            width: 100vw;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img"></div>
+    <div class="progress-container"><span class="progress">0</span>%</div>
+    <script>
+        const imgEle = document.querySelector('.img');
+        const progressEle = document.querySelector('.progress');
+        const progressContainer = document.querySelector('.progress-container');
+        const imgUrl = 'https://picsum.photos/1200/500';
+        fetch(imgUrl).then(() => {
+            imgEle.style['background-image'] = `url(${imgUrl})`;
+            start();
+        });
+        progress = 0;
+        let intervalId;
+        function run() {
+            progress++;
+            if (progress > 99) {
+                clearInterval(intervalId);
+            }
+            progressContainer.style.opacity = scaleNum(progress, 0, 100, 1, 0, 1);
+            progressEle.textContent = scaleNum(progress, 0, 100, 0, 100);
+            imgEle.style.filter = `blur(${scaleNum(progress, 0, 100, 30, 0)}px)`;
+        }
+        function start() {
+            intervalId = setInterval(run, 30);
+        }
+        function scaleNum(num, inMin, inMax, outMin, outMax, fixed = 0) {
+            return ((num - inMin) / (inMax - inMin) * (outMax - outMin) + outMin).toFixed(fixed);
+        }
+    </script>
+</body>
+
+</html>

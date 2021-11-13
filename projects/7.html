@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Landing Page</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+        }
+        div {
+            flex: 1;
+        }
+        .split-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .split-wrapper h1 {
+            color: #fff;
+            font-size: 60px;
+        }
+        .split-wrapper button {
+            border: none;
+            outline: none;
+            height: 74px;
+            width: 240px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: transparent;
+            border: 3px #fff solid;
+        }
+        .split-wrapper {
+            background-size: cover;
+            background-position: 0;
+        }
+        .split-wrapper:first-child {
+            background-image: url('https://50projects50days.com/projects/split-landing-page/ps.jpg');
+        }
+        .split-wrapper:nth-child(2) {
+            background-image: url('https://50projects50days.com/projects/split-landing-page/xbox.jpg');
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="split-wrapper">
+            <h1>Playstation 5</h1>
+            <button>BUY NOW</button>
+        </div>
+        <div class="split-wrapper">
+            <h1>XBox Series X</h1>
+            <button>BUY NOW</button>
+        </div>
+    </div>
+</body>
+</html>

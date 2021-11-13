@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Steps</title>
+    <style>
+        :root {
+            --line-border-fill: #3498db;
+            --line-border-empty: #e0e0e0;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f6f7fb;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .container {
+            height: 103px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .container > div {
+            width: 100%;
+        }
+        .steps-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        .middle-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--line-border-empty);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+        .middle-line.active-line {
+            background-color: var(--line-border-fill);
+            transition: all .5s;
+        }
+        .step {
+            box-sizing: content-box;
+            width: 26px;
+            height: 26px;
+            border: 3px solid var(--line-border-empty);
+            border-radius: 50%;
+            line-height: 26px;
+            text-align: center;
+            background-color: #fff;
+            transition: all .3s;
+            color: #999;
+        }
+        .step.active {
+            border-color: #3498db;
+        }
+        .button-container {
+            text-align: center;
+        }
+        button {
+            border: none;
+            background-color: var(--line-border-fill);
+            color: #fff;
+            height: 30px;
+            width: 90px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:active {
+            transform: scale(.95);
+        }
+        button:first-child {
+            margin-right: 20px;
+        }
+        button:disabled {
+            background-color: var(--line-border-empty);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="steps-container">
+            <div class="middle-line"></div>
+            <div class="middle-line active-line"></div>
+            <div class="step">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+            <div class="step">4</div>
+        </div>
+        <div class="button-container">
+            <button onclick="prev()">Prev</button>
+            <button onclick="next()">Next</button>
+        </div>
+    </div>
+    <script>
+        let step = 1;
+        const steps = document.querySelectorAll('.step');
+        const buttons = document.querySelectorAll('button');
+        function prev() {
+            step = step > 1 ? step - 1 : step;
+            render();
+        }
+        function next() {
+            step = step < steps.length ? step + 1 : step;
+            render();
+        }
+        function render() {
+            const stepElements = document.querySelectorAll('.step');
+            steps.forEach((ele, index) => {
+                if(index < step) {
+                    ele.classList.add('active');
+                } else {
+                    ele.classList.remove('active');
+                }
+            });
+            document.querySelector('.active-line').style.width = (step - 1)/(steps.length - 1)*100 + '%';
+            if(step === 1) {
+                buttons.item(0).disabled = true;
+                buttons.item(1).disabled = false;
+            } else if(step === steps.length) {
+                buttons.item(0).disabled = false;
+                buttons.item(1).disabled = true;
+            } else {
+                buttons.item(0).disabled = false;
+                buttons.item(1).disabled = false;
+            }
+        }
+        render();
+    </script>
+</body>
+</html>

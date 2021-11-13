@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css" rel="stylesheet">
+    <title>Rotating Navigation Animation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #333333;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        #checkbox {
+            display: none;
+        }
+        label {
+            cursor: pointer;
+        }
+        main {
+            transform-origin: 0 0;
+            transition: all .5s;
+            background-color: #fafafa;
+            min-height: 1000px;
+            padding: 100px 50px 50px;
+        }
+        #checkbox:checked ~ main {
+            transform: rotateZ(-20deg);
+        }
+        .label-container {
+            background-color: #ff7979;
+            color: #fff;
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;
+            position: relative;
+            margin-top: -100px;
+            margin-left: -100px;
+            font-size: 30px;
+            transition: all .5s;
+            float: left;
+            z-index: 1;
+        }
+        #checkbox:checked ~ header>.label-container {
+            transform: rotateZ(-90deg);
+        }
+        .label-container>label:first-child {
+            position: absolute;
+            right: 25%;
+            bottom: 25%;
+            transform: translate(25%, 25%);
+        }
+        .label-container>label:nth-child(2) {
+            position: absolute;
+            left: 25%;
+            bottom: 25%;
+            transform: translate(-25%, 25%);
+        }
+        nav {
+            position: fixed;
+            right: calc(100% + 100px);
+            bottom: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            height: 100px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 100px;
+        }
+        nav>a {
+            color: #e9e9e9;
+            transition: all .4s ease-in;
+        }
+        #checkbox:checked ~ header>nav>a:first-child {
+            transition: all .8s ease-in-out;
+            transform: translate(220px);
+        }
+        #checkbox:checked ~ header>nav>a:nth-child(2) {
+            transition: all .8s ease-in-out;
+            transform: translate(240px);
+        }
+        #checkbox:checked ~ header>nav>a:nth-child(3) {
+            transition: all .8s ease-in-out;
+            transform: translate(260px);
+        }
+    </style>
+</head>
+<body>
+    <input id="checkbox" type="checkbox">
+    <header>
+        <div class="label-container">
+            <label for="checkbox">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </label>
+            <label for="checkbox">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </label>
+        </div>
+        <nav>
+            <a href="#">HOME</a>
+            <a href="#">ABOUT</a>
+            <a href="#">CONTRACT</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Amazing Article</h1>
+        <small>Florin Pop</small>
+    </main>
+</body>
+</html>
